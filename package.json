@@ -1,0 +1,23 @@
+{
+  "name": "servs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoodPop/servs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoodPop/servs/issues"
+  },
+  "homepage": "https://github.com/DoodPop/servs#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
