@@ -1,13 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
-const cors = require('cors'); 
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-const cors = require('cors'); 
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
