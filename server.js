@@ -19,8 +19,8 @@ const pool = new Pool({
     port: 15264,
 });
 
-app.post('/addUser', async (req, res) => {
-    console.log('Received a POST request to /addUser');
+app.post('/', async (req, res) => {
+    console.log('working');
 
     try {
         const userData = req.body;
