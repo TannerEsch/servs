@@ -1,16 +1,15 @@
 const express = require('express');
-const app = express();
-const { Pool, Client } = require('pg');
-
 const bodyParser = require('body-parser');
+const { Pool } = require('pg');
 
-
+const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-app.use(bodyParser.json());
 
 const pool = new Pool({
     user: 'avnadmin',
@@ -21,11 +20,10 @@ const pool = new Pool({
 });
 
 app.post('/addUser', async (req, res) => {
-    console.log('Starting server...');
+    console.log('Received a POST request to /addUser');
 
     try {
         const userData = req.body;
-
 
         const query = {
             text: 'INSERT INTO users(user_name, user_gmail) VALUES($1, $2)',
