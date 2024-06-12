@@ -24,6 +24,10 @@ app.post('/addUser', async (req, res) => {
 
     try {
         const userData = req.body;
+        if (!userData.name || !userData.email) {
+            res.status(400).send('Invalid user data');
+            return;
+        }
 
         const query = {
             text: 'INSERT INTO users(user_name, user_gmail) VALUES($1, $2)',
@@ -31,10 +35,12 @@ app.post('/addUser', async (req, res) => {
         };
 
         const client = await pool.connect();
-        await client.query(query);
-        client.release();
-
-        res.status(201).send('User information inserted into the database');
+        try {
+            await client.query(query);
+            res.status(201).send('User information inserted into the database');
+        } finally {
+            client.release();
+        }
     } catch (error) {
         console.error('Error inserting user information into the database:', error);
         res.status(500).send('Error inserting user information into the database');
