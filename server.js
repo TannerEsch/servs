@@ -21,6 +21,8 @@ const pool = new Pool({
 });
 
 app.post('/addUser', async (req, res) => {
+    console.log('Starting server...');
+
     try {
         const userData = req.body;
 
