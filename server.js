@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: 'https://chat-app-tawny-seven.vercel.app',
+  origin: 'https://chat-app-tawny-seven.vercel.app/chat.html',
   methods: 'GET, POST, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization'
 };
