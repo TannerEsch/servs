@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: 'https://chat-app-tawny-seven.vercel.app',
+  origin: 'https://chat-app-tawny-seven.vercel.app/chat.html#state=pass-through%20value&access_token=ya29.a0AXooCgvbnHST819r4OsjIzRwAssKs5ZMuI9HJPH-XD7LF91VyVJN1xBEvtlso-q-vQcegiW6D1B0oo3q_ImpyjMyr6T1hUV7OvNfsDF_8bZP925nS2k1SN3DPD_v1LTMZbyzCuqD7_gZOZk3BtMURb2KZ_02EPRKvwZaaCgYKAegSARMSFQHGX2MiiD8ysd_GSJGs-y55Z6X7IA0171&token_type=Bearer&expires_in=3599&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile%20openid&authuser=1&prompt=none',
   methods: 'GET, POST, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization'
 };
