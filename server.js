@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 const pool = new Pool({
     user: 'avnadmin',
     host: 'pg-3e7f2846-postgresqldb.g.aivencloud.com',
-    database: 'defaultdb',
+    database: 'chatapp',
     password: 'AVNS_C4x7Sfu9yg1PN9RxchX',
     port: 15264,
 });
