@@ -29,13 +29,13 @@ const pool = new Pool({
     port: 15264,
 });
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
     const userData = req.body;
     if (!userData || !userData.name || !userData.email) {
       return res.status(400).json({ error: 'Name and email are required' });
     }
   
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) ON CONFLICT (email) DO UPDATE SET name = $1', 
+    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name' , 
       [userData.name, userData.email], 
       (err, result) => {
         if (err) {
