@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
   const { user_id, user_name, user_gmail } = req.body;
   console.log('Received user data:', req.body); 
 
-  if (!user_id || !user_name || !user_gmail) {
+  if (user_id || user_name || user_gmail) {
     return res.status(400).json({ error: 'User ID, Name, and Gmail are required' });
   }
 
