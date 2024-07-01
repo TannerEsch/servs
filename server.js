@@ -31,11 +31,11 @@ const pool = new Pool({
 
 app.post('/users', (req, res) => {
   const { user_id, user_name, user_gmail } = req.body;
- 
+  console.log('Received user data:', req.body); 
+
   if (!user_id || !user_name || !user_gmail) {
     return res.status(400).json({ error: 'User ID, Name, and Gmail are required' });
   }
-
 
   pool.query(
     'INSERT INTO users (user_id, user_name, user_gmail) VALUES ($1, $2, $3) ON CONFLICT (user_id) DO UPDATE SET user_name = $2, user_gmail = $3',
@@ -45,10 +45,13 @@ app.post('/users', (req, res) => {
         console.error('Error executing query:', err);
         return res.status(500).json({ error: 'Error storing user data' });
       }
+      console.log('User data stored successfully:', result.rowCount); 
+
       res.status(200).json({ message: 'User data stored successfully' });
     }
   );
 });
+
 
   
   app.listen(port, () => {
