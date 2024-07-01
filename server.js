@@ -29,7 +29,7 @@ const pool = new Pool({
     port: 15264,
 });
 
-app.post('/users', (req, res) => {
+app.post('/', (req, res) => {
   const { user_id, user_name, user_gmail } = req.body;
   console.log('Received user data:', req.body); 
 
