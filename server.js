@@ -33,9 +33,10 @@ app.post('/', (req, res) => {
   const { user_id, user_name, user_gmail } = req.body;
   console.log('Received user data:', req.body); 
 
-  if (none) {
+  if (!(user_id && user_name && user_gmail)) {
     return res.status(400).json({ error: 'User ID, Name, and Gmail are required' });
   }
+  
 
   pool.query(
     'INSERT INTO users (user_id, user_name, user_gmail) VALUES ($1, $2, $3) ON CONFLICT (user_id) DO UPDATE SET user_name = $2, user_gmail = $3',
