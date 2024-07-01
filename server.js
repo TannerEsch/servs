@@ -29,23 +29,27 @@ const pool = new Pool({
     port: 15264,
 });
 
-app.post('/', (req, res) => {
-    const userData = req.body;
-    if (!userData || !userData.name || !userData.email) {
-      return res.status(400).json({ error: 'Name and email are required' });
-    }
-  
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name' , 
-      [userData.name, userData.email], 
-      (err, result) => {
-        if (err) {
-          console.error('Error storing user data:', err);
-          return res.status(500).json({ error: 'Error storing user data' });
-        }
-        res.status(200).json({ message: 'User data stored successfully' });
+app.post('/users', (req, res) => {
+  const { user_id, user_name, user_gmail } = req.body;
+ 
+  if (!user_id || !user_name || !user_gmail) {
+    return res.status(400).json({ error: 'User ID, Name, and Gmail are required' });
+  }
+
+
+  pool.query(
+    'INSERT INTO users (user_id, user_name, user_gmail) VALUES ($1, $2, $3) ON CONFLICT (user_id) DO UPDATE SET user_name = $2, user_gmail = $3',
+    [user_id, user_name, user_gmail],
+    (err, result) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: 'Error storing user data' });
       }
-    );
-  });
+      res.status(200).json({ message: 'User data stored successfully' });
+    }
+  );
+});
+
   
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
