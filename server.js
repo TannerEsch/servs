@@ -30,17 +30,17 @@ const pool = new Pool({
 });
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
-  const { user_id, user_name, user_email } = req.body;
+  const { user_name, user_email } = req.body;
   console.log('Received user data:', req.body); 
 
-  if (!(user_id && user_name && user_email)) {
-    return res.status(400).json({ error: 'User ID, Name, and Gmail are required' });
+  if (!(  user_name && user_email)) {
+    return res.status(400).json({ error: ' Name, and Gmail are required' });
   }
   
 
   pool.query(
     'INSERT INTO users (user_id, user_name, user_email) VALUES ($1, $2, $3) ON CONFLICT (user_id) DO UPDATE SET user_name = $2, user_email = $3',
-    [user_id, user_name, user_email],
+    [ user_name, user_email],
     (err, result) => {
       if (err) {
         console.error('Error executing query:', err);
