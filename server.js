@@ -29,7 +29,7 @@ const pool = new Pool({
     port: 15264,
 });
 
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
     const userData = req.body;
     if (!userData || !userData.name || !userData.email) {
       return res.status(400).json({ error: 'Name and email are required' });
