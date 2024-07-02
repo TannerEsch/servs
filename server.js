@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,14 +25,14 @@ app.get('/', (req, res) => {
 });
 
 const pool = new Pool({
-  user: 'avnadmin',
-  host: 'pg-3e7f2846-postgresqldb.g.aivencloud.com',
-  database: 'chatapp',
-  password: 'AVNS_C4x7Sfu9yg1PN9RxchX',
-  port: 15264,
-  ssl: {
-    rejectUnauthorized: false // Use this only for testing. In production, use proper SSL verification.
-  }
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: process.env.DB_SSL === 'true' ? {
+    rejectUnauthorized: false
+  } : undefined
 });
 
 
