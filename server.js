@@ -38,20 +38,18 @@ app.post('/', (req, res) => {
   }
   
 
-  pool.query(
-    'INSERT INTO users (user_name, user_email) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET user_name = EXCLUDED.user_name, user_email = EXCLUDED.user_email',
-    [user_name, user_email],
-    (err, result) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        return res.status(500).json({ error: 'Error storing user data' });
-      }
-      console.log('User data stored successfully:', result.rowCount);
-  
-      res.status(200).json({ message: 'User data stored successfully' });
-    }
-  );
-  
+  const query = 'INSERT INTO users (user_name, user_email) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET user_name = EXCLUDED.user_name, user_email = EXCLUDED.user_email'
+const values = [user_name, user_email];
+
+pool.query(query, values, (err, result) => {
+  if (err) {
+    console.error('Error executing query:', err.message, err.stack);
+    return res.status(500).json({ error: 'Error storing user data', details: err.message });
+  }
+
+  console.log('User data stored successfully.', result.rowCount);
+  res.status(200).json({ message: 'User data stored successfully' });
+});
 });
 
 
