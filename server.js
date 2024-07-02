@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 
 const corsOptions = {
-origin: 'https://chat-app-tawny-seven.vercel.app',
+origin: 'https://chat-app-tawny-seven.vercel.app, https://unpkg.com/axios/dist/axios.min.js',
   methods: 'GET, POST, OPTIONS',
   allowedHeaders: 'Content-Type, Authorization'
 };
