@@ -39,7 +39,8 @@ app.post('/', (req, res) => {
   
 
   pool.query(
-    'INSERT INTO users (user_name, user_email) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET user_name = EXCLUDED.user_name, user_email = EXCLUDED.user_email name = $2, user_email = $3',
+    'INSERT INTO users (user_name, user_email) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET user_name = EXCLUDED.user_name, user_email = EXCLUDED.user_email'
+
     [ user_name, user_email],
     (err, result) => {
       if (err) {
